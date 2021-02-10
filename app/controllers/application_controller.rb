@@ -1,4 +1,4 @@
-class ApplicationController < ApplicationController
+class ApplicationController < Sinatra::Base
 
   # GET: /applications
   get "/applications" do
