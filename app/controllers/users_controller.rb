@@ -1,37 +1,29 @@
 class UsersController < ApplicationController
 
-  # GET: /users
-  get "/users" do
-    erb :"/users/index.html"
+  get '/users/login' do
+    erb :'/users/login'
   end
 
-  # GET: /users/new
-  get "/users/new" do
-    erb :"/users/new.html"
+  post 'users/login' do 
+    erb :'users/homepage'
+  end 
+
+  get '/users/:slug' do
+    @user = User.find_by(email: params["email"], password: params["password"])
+    session[:id] = @user.id    
+    erb :'/users/homepage'
   end
 
-  # POST: /users
-  post "/users" do
-    redirect "/users"
-  end
+  get 'users/signup' do 
+    erb :'users/signup'
+  end 
 
-  # GET: /users/5
-  get "/users/:id" do
-    erb :"/users/show.html"
-  end
+  post 'users/signup' do 
+    erb :/users/homepage
+  end 
 
-  # GET: /users/5/edit
-  get "/users/:id/edit" do
-    erb :"/users/edit.html"
-  end
-
-  # PATCH: /users/5
-  patch "/users/:id" do
-    redirect "/users/:id"
-  end
-
-  # DELETE: /users/5/delete
-  delete "/users/:id/delete" do
-    redirect "/users"
+  get '/users/logout' do 
+    session.clear
+    redirect '/'
   end
 end
