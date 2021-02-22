@@ -11,15 +11,15 @@ class UsersController < ApplicationController
   get '/users/:slug' do
     @user = User.find_by(email: params["email"], password: params["password"])
     session[:id] = @user.id  
-    erb :'/users/homepage'
+    erb :'users/homepage'
   end
 
   get '/signup' do 
     erb :'users/signup'
   end 
 
-  post 'signup' do 
-    erb :/users/homepage
+  post '/signup' do 
+    erb :'users/homepage'
   end 
 
   get '/logout' do 
