@@ -13,7 +13,14 @@ class UsersController < ApplicationController
   end 
 
   post '/signup' do 
-    erb :'users/homepage'
+    if params[:firstname] == "" || params[:lastname] == "" || params[:username] == "" || params[:email] == "" || params[:password] == "" 
+      flash[:message] = "Please fill out all fields"
+      redirect to '/signup' 
+    else 
+      @user = User.create(:first_name => params[:firstname], :last_name => params[:lastname], :username => params[:username], :email => params[:email], :password => params[:password])
+      session[:user_id] = @user.id
+      redirect_to_homepage
+    end 
   end 
 
   get '/login' do
