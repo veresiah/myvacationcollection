@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
 
-  get '/users/login' do
+  get '/login' do
     erb :'/users/login'
   end
 
-  post 'users/login' do 
+  post '/login' do 
     erb :'users/homepage'
   end 
 
@@ -14,15 +14,15 @@ class UsersController < ApplicationController
     erb :'/users/homepage'
   end
 
-  get 'users/signup' do 
+  get '/signup' do 
     erb :'users/signup'
   end 
 
-  #post 'users/signup' do 
-    #erb :/users/homepage
-  #end 
+  post 'signup' do 
+    erb :/users/homepage
+  end 
 
-  get '/users/logout' do 
+  get '/logout' do 
     session.clear
     redirect '/'
   end
