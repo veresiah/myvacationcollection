@@ -1,4 +1,3 @@
-#require 'securerandom'
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -16,7 +15,7 @@ class ApplicationController < Sinatra::Base
     def logged_in? 
       !!current_user 
     end 
-s
+
     def current_user 
       @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
     end 
@@ -28,4 +27,5 @@ s
     def redirect_to_homepage
       redirect "/users/:slug"
     end 
+  end 
 end
