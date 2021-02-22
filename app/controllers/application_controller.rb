@@ -24,6 +24,10 @@ class ApplicationController < Sinatra::Base
       redirect "/login"
     end 
 
+    def redirect_to_index
+      redirect "/"
+    end 
+
     def redirect_to_homepage
       redirect "/users/:slug"
     end 
