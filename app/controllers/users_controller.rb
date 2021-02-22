@@ -24,7 +24,11 @@ class UsersController < ApplicationController
   end 
 
   get '/login' do
+    if !logged_in?
     erb :'/users/login'
+    else 
+    redirect_to_homepage
+    end 
   end
 
   post '/login' do 
