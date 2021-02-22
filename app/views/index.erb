@@ -3,20 +3,12 @@
 </header>
     <div class="content">
     <h2> My Vacation Collection</h2> 
-      <p>Welcome to  <strong> My Vacation Collection</strong>, your one place to store a display spippets of your favorite vacations!</p>
+      <p>Welcome to  <strong> My Vacation Collection</strong>, your online repository for storing and display snippets of your favorite vacations!</p>
 
       <p>Sign up or log in below to start your own vacation collection! </p>
     </div>
-
-    <nav>
-    <% if logged_in? %>
-     <a href= "/collections/new" <button>Create a New Collection </button></a>
-     <a href= "/logout" <button>Log Out</button></a> 
-     <p> Welcome, <%=current_user.first_name%></p>
-    <%else%>
     <a href="/signup"> <button>Sign Up</button></a>
     <a href="/login"> <button>Sign In</button></a>
-    <%end%>
-    </nav>
+
 
 
