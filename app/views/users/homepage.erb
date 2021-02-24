@@ -2,7 +2,7 @@
     <% if logged_in? %>
     <p> Welcome back, <strong><%=current_user.first_name%></strong></p>
 
-    <p> Here are you recent Collections: </p>
+    <p> Here are your Collections: </p>
     <p><%@user.collections.each do |collection|%>
         <div> 
         Destination: <%=collection.destination%>
