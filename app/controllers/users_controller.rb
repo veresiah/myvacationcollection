@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   get '/signup' do 
     if !logged_in?
     erb :'users/signup' 
-    flash[:message] = "Please finish signing up before you sign in"
+    #flash[:message] = "Please finish signing up before you sign in"
     else 
       redirect_to_homepage
     end 
