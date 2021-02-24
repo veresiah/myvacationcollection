@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   post '/signup' do 
     if params[:firstname] == "" || params[:lastname] == "" || params[:email] == "" || params[:username] == "" || params[:password] == "" 
-      flash[:message] = "Please fill out all fields"
+      #flash[:message] = "Please fill out all fields"
       redirect to '/signup' 
     else 
       @user = User.create(:first_name => params[:firstname], :last_name => params[:lastname], :email => params[:email], :username => params[:username], :password => params[:password])
