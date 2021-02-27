@@ -29,7 +29,7 @@ class CollectionsController < ApplicationController
     end 
 
     post '/collections' do 
-        Collection.create(destination: params['collection']['destination'], start_date: params['collection']['start_date'],end_date: params['collection']['end_date'], params['collection']['trip_summary'])
+        Collection.create(destination: params['collection']['destination'], start_date: params['collection']['start_date'],end_date: params['collection']['end_date'], trip_summary: params['collection']['trip_summary'])
         redirect '/collections'
     end 
 end 
