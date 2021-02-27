@@ -1,1 +1,18 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<table>
+  <tr>
+    <th>Destination</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Trip Summary</th>
+  </tr>
+  <tr>
+    <td><%= @collection.destination %></td>
+    <td><%= @collection.start_date %></td>
+    <td><%= @collection.end_date %></td>
+    <td><%= @collection.trip_summary %></td>
+  </tr>
+<table>
+
+<a class="button" href="/collections/<%= @collection.id %>/edit">Edit Collection</a>
+<a class="button" href="/collections">View all Collections</a>
+<a class="button" href="/users/:slug">Home</a>
