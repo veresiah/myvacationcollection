@@ -27,4 +27,9 @@ class CollectionsController < ApplicationController
         @collection.save
         redirect "collections/#{@collection.id}"
     end 
+
+    post '/collections' do 
+        Collection.create(destination: params['collection']['destination'], start_date: params['collection']['start_date'],end_date: params['collection']['end_date'], params['collection']['trip_summary'])
+        redirect '/collections'
+    end 
 end 
