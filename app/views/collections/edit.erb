@@ -1,1 +1,16 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<h2>Edit this Vacation Collection</h2>
+
+<form action="/collections/<%=@collection.id%>" method="POST">
+  <input type="hidden" name="_method" value="patch">
+  <label for="collection_destination">Destination</label><br>
+  <input id="collection_destination" type="text" name="collection[destination]"  value=<%=@collection.name%> ><br>
+  <label for="collection_start_date">Start Date</label><br>
+  <input id="collection_start_date" type="text" name="collection[start_date]" value=<%=@collection.start_date%> ><br>
+  <label for="collection_end_date">End Date</label><br>
+  <input id="collection_end_date" type="text" name="collection[end_date]" value=<%=@collection.end_date%> ><br>
+  <label for="collection_trip_summary">Trip Summary</label><br>
+  <input id="collection_trip_summary" type="text" name="collection[trip_summary]" value=<%=@collection.trip_summary%> ><br>
+  <input type="submit" value="Edit Collection">
+</form>
+<a class="button" href="/collections">View all Collections</a>
+<a class="button" href="/users/:slug">Home</a>
