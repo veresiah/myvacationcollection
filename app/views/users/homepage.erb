@@ -2,17 +2,6 @@
     <% if logged_in? %>
     <p> Welcome back, <strong><%=current_user.first_name%></strong></p>
 
-    <p> Here are your Collections: </p>
-    #<p><%@user.collections.each do |collection|%>
-        #<div> 
-        #Destination: <%=collection.destination%>
-        #Start Date: <%=collection.start_date%>
-        #End Date: <%=collection.end_date%>
-        #Trip Summary: <%=collection.trip_summary%>
-        #</div>
-    #<%end%>
-    </p>
-
      <a href= "/collections/new" <button>Create a New Collection </button></a>
      <a href= "/logout" <button>Log Out</button></a> 
     <%else%>
