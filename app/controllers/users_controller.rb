@@ -45,7 +45,6 @@ class UsersController < ApplicationController
   get '/logout' do 
     if logged_in?
       session.clear
-    else
       redirect_to_index
     end 
   end
