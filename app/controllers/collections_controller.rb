@@ -46,10 +46,28 @@ class CollectionsController < ApplicationController
         if logged_in?
             Collection.create(destination: params['collection']['destination'], start_date: params['collection']['start_date'],end_date: params['collection']['end_date'], trip_summary: params['collection']['trip_summary'])
             redirect '/collections'
+        
         end 
     end 
 
-    
-
-
+    patch '/collections/:id' do 
+        if logged_in? 
+            if params['collection']['destination'] == "" || params['collection']['start_date'] == "" || params['collection']['end_date'] == "" || params['collection']['trip_summary'] == ""
+                redirect '/collections/#{params[:id]}/edit'
+            else 
+                @collection = Collection.find(params[:id])
+                if @collection && @collection.user == current_user 
+                    if @collection.update(destination: params['collection']['destination'], start_date: params['collection']['start_date'],end_date: params['collection']['end_date'], trip_summary: params['collection']['trip_summary'])
+                        redirect '/collections/#{@collection.id}'
+                    else 
+                        redirect '/collections/#@collection.id}/edit'
+                    end 
+                else 
+                    redirect '/collections'
+                end 
+            end 
+        else 
+            redirect_to_login
+        end 
+    end 
 end 
