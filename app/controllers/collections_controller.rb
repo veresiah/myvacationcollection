@@ -26,7 +26,7 @@ class CollectionsController < ApplicationController
         erb :'collections/edit'
     end 
 
-    post 'collections/:id' do 
+    post '/collections/:id' do 
         @collection = Collection.find(parmas[:id])
         @collection.destination = params['collection']['destination']
         @collection.start_date = params['collection']['start_date']
