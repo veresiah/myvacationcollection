@@ -17,27 +17,39 @@ class CollectionsController < ApplicationController
     end  
 
     get '/collections/:id' do 
-        @collection = Collection.find(params[:id])
-        erb :'collections/show'
+        if logged_in?
+            @collection = Collection.find(params[:id])
+            erb :'collections/show'
+        end
     end 
 
     get '/collections/:id/edit' do 
-    @collection = Collection.find(params[:id])
-        erb :'collections/edit'
+        if logged_in?
+            @collection = Collection.find(params[:id])
+            erb :'collections/edit'
+        end
     end 
 
     post '/collections/:id' do 
-        @collection = Collection.find(parmas[:id])
-        @collection.destination = params['collection']['destination']
-        @collection.start_date = params['collection']['start_date']
-        @collection.end_date = params['collection']['end_date']
-        @collection.trip_summary = params['collection']['trip_summary']
-        @collection.save
-        redirect "collections/#{@collection.id}"
+        if logged_in?
+            @collection = Collection.find(parmas[:id])
+            @collection.destination = params['collection']['destination']
+            @collection.start_date = params['collection']['start_date']
+            @collection.end_date = params['collection']['end_date']
+            @collection.trip_summary = params['collection']['trip_summary']
+            @collection.save
+            redirect "collections/#{@collection.id}"
+        end 
     end 
 
     post '/collections' do 
-        Collection.create(destination: params['collection']['destination'], start_date: params['collection']['start_date'],end_date: params['collection']['end_date'], trip_summary: params['collection']['trip_summary'])
-        redirect '/collections'
+        if logged_in?
+            Collection.create(destination: params['collection']['destination'], start_date: params['collection']['start_date'],end_date: params['collection']['end_date'], trip_summary: params['collection']['trip_summary'])
+            redirect '/collections'
+        end 
     end 
+
+    
+
+
 end 
