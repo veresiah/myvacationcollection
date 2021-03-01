@@ -8,7 +8,7 @@ class CollectionsController < ApplicationController
         end 
     end 
 
-    get 'collections/new' do  
+    get '/collections/new' do  
         if logged_in?  
         erb :'collections/new'
         else 
@@ -16,12 +16,12 @@ class CollectionsController < ApplicationController
         end 
     end  
 
-    get 'collections/:id' do 
+    get '/collections/:id' do 
         @collection = Collection.find(params[:id])
         erb :'collections/show'
     end 
 
-    get 'collections/:id/edit' do 
+    get '/collections/:id/edit' do 
     @collection = Collection.find(params[:id])
         erb :'collections/edit'
     end 
