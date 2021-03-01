@@ -1,7 +1,7 @@
 <h2>Edit this Vacation Collection</h2>
 
 <form action="/collections/<%=@collection.id%>" method="POST">
-  <input type="hidden" name="_method" value="patch">
+  <input type="hidden" name="_method" value="PATCH">
   <label for="collection_destination">Destination</label><br>
   <input id="collection_destination" type="text" name="collection[destination]"  value=<%=@collection.name%> ><br>
   <label for="collection_start_date">Start Date</label><br>
