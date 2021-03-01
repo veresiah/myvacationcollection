@@ -70,4 +70,16 @@ class CollectionsController < ApplicationController
             redirect_to_login
         end 
     end 
+
+    delete 'collections/:id/delete' do 
+        if logged_in?
+            @collection = Collection/find(params[:id])
+            if @collection && @collection.user == current_user
+                @collection.delete  
+            end 
+            redirect '/collections'
+        else 
+            redirect_to_login
+        end 
+    end 
 end 
