@@ -33,10 +33,10 @@ class CollectionsController < ApplicationController
     post '/collections/:id' do 
         if logged_in?
             @collection = Collection.find(parmas[:id])
-            @collection.destination = params['collection']['destination']
-            @collection.start_date = params['collection']['start_date']
-            @collection.end_date = params['collection']['end_date']
-            @collection.trip_summary = params['collection']['trip_summary']
+            @collection.destination = params[:destination]
+            @collection.start_date = params[:start_date]
+            @collection.end_date = params[:end_date]
+            @collection.trip_summary = params[:trip_summary]
             @collection.save
             redirect "collections/#{@collection.id}"
         end 
@@ -44,26 +44,36 @@ class CollectionsController < ApplicationController
 
     post '/collections' do 
         if logged_in?
-            Collection.create(destination: params['collection']['destination'], start_date: params['collection']['start_date'],end_date: params['collection']['end_date'], trip_summary: params['collection']['trip_summary'])
+            Collection.create(destination: params[:destination], start_date: params[:start_date],end_date: params[:end_date], trip_summary: params[:trip_summary])
             redirect '/collections'
         
         end 
     end 
 
+    #blank page with no content at '/collections#{@collection.id}'
     patch '/collections/:id' do 
         if logged_in? 
-            if params['collection']['destination'] == "" || params['collection']['start_date'] == "" || params['collection']['end_date'] == "" || params['collection']['trip_summary'] == ""
+            if params[:destination].empty? 
                 redirect '/collections/#{params[:id]}/edit'
-            else 
-                @collection = Collection.find(params[:id])
-                if @collection && @collection.user == current_user 
-                    if @collection.update(destination: params['collection']['destination'], start_date: params['collection']['start_date'],end_date: params['collection']['end_date'], trip_summary: params['collection']['trip_summary'])
-                        redirect '/collections/#{@collection.id}'
-                    else 
-                        redirect '/collections/#@collection.id}/edit'
-                    end 
-                else 
-                    redirect '/collections'
+                if params[:start_date].empty? 
+                    redirect '/collections/#{params[:id]}/edit'
+                    if params[:end_date].empty?
+                        redirect '/collections/#{params[:id]}/edit'
+                        if params[:trip_summary].empty?
+                            redirect '/collections/#{params[:id]}/edit'
+                        else 
+                            @collection = Collection.find(params[:id])
+                            if @collection
+                                if @collection.update(destination: params[:destination], start_date: params[:start_date], end_date: params[:end_date], trip_summary: params[:trip_summary])
+                                    redirect '/collections#{@collection.id}'
+                                else 
+                                    redirect '/collections/#@collection.id}/edit'
+                                end 
+                            else 
+                                redirect '/collections'
+                            end 
+                        end 
+                    end
                 end 
             end 
         else 
@@ -71,12 +81,11 @@ class CollectionsController < ApplicationController
         end 
     end 
 
-    delete 'collections/:id/delete' do 
+    #fix sinatra error 
+    delete '/collections/:id/delete' do 
         if logged_in?
-            @collection = Collection/find(params[:id])
-            if @collection && @collection.user == current_user
-                @collection.delete  
-            end 
+            @collection = Collection.find(params[:id])
+            @collection.delete  
             redirect '/collections'
         else 
             redirect_to_login

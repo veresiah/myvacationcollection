@@ -1,5 +1,7 @@
 class ApplicationController < Sinatra::Base
-
+require 'sinatra'
+require 'rack-flash'
+  use Rack::Flash
   configure do
     set :views, 'app/views'
     set :public_folder, 'public'
