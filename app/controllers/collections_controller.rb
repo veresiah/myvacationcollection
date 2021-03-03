@@ -50,7 +50,7 @@ class CollectionsController < ApplicationController
         end 
     end 
 
-    #blank page with no content at '/collections#{@collection.id}'
+    #blank page with no content at '/collections#{@collection.id}' after editing collection
     patch '/collections/:id' do 
         if logged_in? 
             if params[:destination].empty? 
@@ -81,7 +81,7 @@ class CollectionsController < ApplicationController
         end 
     end 
 
-    #fix sinatra error 
+    #fix sinatra error - doesn't know this ditty
     delete '/collections/:id/delete' do 
         if logged_in?
             @collection = Collection.find(params[:id])
