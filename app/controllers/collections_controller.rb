@@ -6,11 +6,8 @@ class CollectionsController < ApplicationController
     end 
 
     get '/collections/new' do  
-        if logged_in?  
+        redirect_if_not_logged_in  
         erb :'collections/new'
-        else 
-            redirect_to_login
-        end 
     end  
 
     get '/collections/:id' do 
