@@ -33,28 +33,13 @@ class CollectionsController < ApplicationController
     end 
 
     post '/collections' do 
-        if logged_in?
-            if params[:destination].empty? 
-                redirect '/collections/new'
-                if params[:start_date].empty? 
-                    redirect '/collections/new'
-                    if params[:end_date].empty?
-                        redirect '/collections/new'
-                        if params[:trip_summary].empty?
-                            redirect '/collections/new'
-                        else 
-                            @collection = current_user.collections.create(destination: params[:destination], start_date: params[:start_date],end_date: params[:end_date], trip_summary: params[:trip_summary])
-                            if @collection.save
-                                redirect '/collections/#{@collection.id}'
-                            else 
-                                redirect '/collections/new'
-                            end 
-                        end 
-                    end 
-                end 
-            end 
+        redirect_if_not_logged_in
+        @collection = current_user.collections.build(destination: params[:destination], start_date: params[:start_date],end_date: params[:end_date], trip_summary: params[:trip_summary])
+        if @collection.save
+            redirect '/collections/#{@collection.id}'
         else 
-            redirect_to_login
+            flash[:error] = collection.errors.full_messages.to_sentence
+            redirect '/collections/new'
         end 
     end 
  
