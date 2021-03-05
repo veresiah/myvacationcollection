@@ -1,7 +1,7 @@
 class CollectionsController < ApplicationController
     get '/collections' do 
         if logged_in?
-        @collections = Collection.all 
+        @collections = Collection.where(user_id: current_user) 
         erb :'collections/index'
         else 
             redirect_to_login
