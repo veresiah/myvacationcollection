@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do 
-    redirect_if_not_logged_in
     erb :'users/signup' 
   end 
 
@@ -16,25 +15,22 @@ class UsersController < ApplicationController
       redirect_to_homepage
     else 
       flash[:error] = user.errors.full_messages.to_sentence
-      redirect to '/signup' 
+      redirect '/signup' 
     end 
   end 
 
   get '/login' do
-    if !logged_in?
     erb :'/users/login'
-    else 
-    redirect_to_homepage
-    end 
   end
 
   post '/login' do 
-    user = User.find_by(:username => params[:username])
-    if user && user.authenticate(params[:password])
+    @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:message] = "Logged in Successfully"
       redirect_to_homepage
     else 
+      flash[:error] = "Invalid credentials"
       redirect_to_login
     end 
   end 
