@@ -30,6 +30,7 @@ class CollectionsController < ApplicationController
         end
     end 
 
+    #blank page with no content
     post '/collections' do 
         if logged_in?
             if params[:destination].empty? 
@@ -55,18 +56,7 @@ class CollectionsController < ApplicationController
             redirect_to_login
         end 
     end 
-
-    post '/collections/:id' do 
-        if logged_in?
-            @collection = Collection.find(parmas[:id])
-            @collection.destination = params[:destination]
-            @collection.start_date = params[:start_date]
-            @collection.end_date = params[:end_date]
-            @collection.trip_summary = params[:trip_summary]
-            @collection.save
-            redirect "collections/#{@collection.id}"
-        end 
-    end 
+ 
 
     #blank page with no content at '/collections#{@collection.id}' after editing collection
     patch '/collections/:id' do 
