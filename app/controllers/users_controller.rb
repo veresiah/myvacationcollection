@@ -5,11 +5,8 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do 
-    if !logged_in?
+    redirect_if_not_logged_in
     erb :'users/signup' 
-    else 
-      redirect_to_homepage
-    end 
   end 
 
   post '/signup' do 
