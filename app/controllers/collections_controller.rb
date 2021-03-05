@@ -9,17 +9,18 @@ class CollectionsController < ApplicationController
         redirect_if_not_logged_in 
         erb :'collections/new'
     end  
+
     get '/collections/:id' do 
-        if logged_in?
-            @collection = Collection.find(params[:id])
-            if @collection.user == current_user
-                erb :'collections/show'
-            else
-                flash[:error] = "Access denied!"
-                redirect "/collections"
-            end
+        redirect_if_not_logged_in
+        @collection = Collection.find(params[:id])
+        if @collection.user == current_user
+            erb :'collections/show'
+        else
+            flash[:error] = "Access denied!"
+            redirect "/collections"
         end
     end 
+    
     get '/collections/:id/edit' do 
         if logged_in?
             @collection = Collection.find(params[:id])
