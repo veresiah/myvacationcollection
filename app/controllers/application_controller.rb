@@ -3,7 +3,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     set :public_folder, 'public'
     enable :sessions
-    set :session_secret, ENV["SESSION_SECRET"
+    set :session_secret, ENV["SESSION_SECRET"]
     use Rack::Flash
   end
 
@@ -34,5 +34,6 @@ class ApplicationController < Sinatra::Base
 
     def redirect_if_not_logged_in
       redirect_to_login if !logged_in?
+    end
   end
 end
