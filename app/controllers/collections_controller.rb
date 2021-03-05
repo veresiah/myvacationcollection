@@ -20,16 +20,15 @@ class CollectionsController < ApplicationController
             redirect "/collections"
         end
     end 
-    
+
     get '/collections/:id/edit' do 
-        if logged_in?
-            @collection = Collection.find(params[:id])
-            if @collection.user == current_user
-                erb :'collections/edit'
-            else
-                flash[:error] = "Access denied!"
-                redirect "/collections"
-            end
+        redirect_if_not_logged_in
+        @collection = Collection.find(params[:id])
+        if @collection.user == current_user
+            erb :'collections/edit'
+        else
+            flash[:error] = "Access denied!"
+            redirect "/collections"
         end
     end 
     #blank page with no content at '/collections#{@collection.id}' after creating collection
