@@ -30,7 +30,7 @@ class CollectionsController < ApplicationController
         end
     end 
 
-    #blank page with no content
+    #blank page with no content at '/collections#{@collection.id}' after creating collection
     post '/collections' do 
         if logged_in?
             if params[:destination].empty? 
