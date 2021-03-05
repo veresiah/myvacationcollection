@@ -29,7 +29,7 @@ class ApplicationController < Sinatra::Base
     end 
 
     def redirect_to_homepage
-      redirect "/users/:slug"
+      redirect "/users/#{slug}"
     end 
 
     def redirect_if_not_logged_in
