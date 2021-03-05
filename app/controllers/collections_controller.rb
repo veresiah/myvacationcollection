@@ -1,18 +1,13 @@
 class CollectionsController < ApplicationController
     get '/collections' do 
-        if logged_in?
-            @collections = current_user.collections 
-            erb :'collections/index'
-        else 
-            redirect_to_login
-        end 
+        redirect_if_not_logged_in
+        @collections = current_user.collections 
+        erb :'collections/index'
     end 
+
     get '/collections/new' do  
-        if logged_in?  
-            erb :'collections/new'
-        else 
-            redirect_to_login
-        end 
+        redirect_if_not_logged_in 
+        erb :'collections/new'
     end  
     get '/collections/:id' do 
         if logged_in?
