@@ -1,12 +1,16 @@
-
+<h2>"<%= @collection.destination %> Collection"</h2>
+<br>
   <ul>
     <li><strong>Destination</strong>: <%= @collection.destination %></li><br>
     <li><strong>Start Date</strong>: <%= @collection.start_date %></li><br>
     <li><strong>End Date</strong>: <%= @collection.end_date %></li><br>
     <li><strong>Trip Summary</strong>: <%= @collection.trip_summary %></li><br>
   </ul>
-
+</br>
+<form action="/collections/<%= @collection.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Collection">
+</form>
 <p><a class="button" href="/collections/<%= @collection.id %>/edit">Edit Collection</a></p>
-<p><a class "button" href="/collections/<%= @collection.id %>/delete">Delete Collection</a></p>
 <p><a class="button" href="/collections">View all Collections</a></p>
 <p><a class="button" href="/users/:slug">Home</a></p>
