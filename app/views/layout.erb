@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="/css/bootstrap-responsive.css"
   </head>
   <body>
+  <% if flash[:error] || flash[:success] || flash[:message] || flash[:warning] %>
+        <div>
+          <%= flash[:error] || flash[:success] || flash[:message] || flash[:warning] %>
+        </div>
+    <% end %>
     <div class="wrapper">
 
         <%= yield %>
