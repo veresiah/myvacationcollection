@@ -1,12 +1,12 @@
 <h2>My Vacation Collections</h2>
-
+<ul>
     <% @collections.each do |collection| %>
-        <li><a href="/collections/<%=collection.id %>"><strong>Destination</strong>: <%= collection.destination %></li><br>
-        <li><strong>Start Date</strong>: <%= collection.start_date %></li><br>
-        <li><strong>End Date</strong>: <%= collection.end_date %></li><br>
-        <li><strong>Trip Summary</strong>: <%= collection.trip_summary %></li><br>
- 
+        <li><a href="/collections/<%=collection.id %>"><strong>Destination</strong>: <%= collection.destination %></a><br>
+        <strong>Start Date</strong>: <%= collection.start_date %><br>
+        <strong>End Date</strong>: <%= collection.end_date %><br>
+        <strong>Trip Summary</strong>: <%= collection.trip_summary %></li><br>
     <%end%>
+</ul>
 
 <p><a class="button" href="collections/new">Create a new Vacation Collection</a></p>
 <p><a class="button" href="/users/:slug">Home</a></p>
