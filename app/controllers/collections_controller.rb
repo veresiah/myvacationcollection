@@ -31,19 +31,16 @@ class CollectionsController < ApplicationController
             redirect "/collections"
         end
     end 
-    #blank page with no content at '/collections#{@collection.id}' after creating collection
+
     post '/collections' do 
-        if logged_in?
-            collection = current_user.collections.build(destination: params[:destination], start_date: params[:start_date],end_date: params[:end_date], trip_summary: params[:trip_summary])
-            if collection.save
-                redirect "/collections/#{collection.id}"
-            else 
-                flash[:error] = collection.errors.full_messages.to_sentence
-                redirect '/collections/new'
-            end     
+        redirect_if_not_logged_in
+        collection = current_user.collections.build(destination: params[:destination], start_date: params[:start_date],end_date: params[:end_date], trip_summary: params[:trip_summary])
+        if collection.save
+            redirect "/collections/#{collection.id}"
         else 
-            redirect_to_login
-        end 
+            flash[:error] = collection.errors.full_messages.to_sentence
+            redirect '/collections/new'
+        end     
     end 
     #blank page with no content at '/collections#{@collection.id}' after editing collection
     patch '/collections/:id' do 
