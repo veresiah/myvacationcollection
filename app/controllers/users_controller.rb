@@ -36,10 +36,9 @@ class UsersController < ApplicationController
   end 
 
   get '/logout' do 
-    if logged_in?
-      session.clear
-      flash[:message] = "Logged out Successfully"
-      redirect_to_index
-    end 
+    redirect_if_not_logged_in
+    session.clear
+    flash[:message] = "Logged out Successfully"
+    redirect_to_index
   end
 end
