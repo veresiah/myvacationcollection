@@ -1,12 +1,10 @@
 class ApplicationController < Sinatra::Base
-require 'sinatra'
-require 'rack-flash'
-  use Rack::Flash
   configure do
     set :views, 'app/views'
     set :public_folder, 'public'
     enable :sessions
-    set :session_secret, "myvaca_so_secret"
+    set :session_secret, ENV["SESSION_SECRET"
+    use Rack::Flash
   end
 
   get '/' do 
