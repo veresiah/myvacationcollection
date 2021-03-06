@@ -57,19 +57,16 @@ class CollectionsController < ApplicationController
             redirect '/collections'
         end 
     end 
-    
+
     delete '/collections/:id' do 
-        if logged_in?
-            collection = Collection.find(params[:id])
-            if collection.destroy
-                flash[:success] = "Collection successfully destroyed"
-                redirect '/collections'
-            else
-                flash[:error] = collection.errors.full_messages.to_sentence
-                redirect "/collections/#{collection.id}"
-            end
-        else 
-            redirect_to_login
-        end 
+        redirect_if_not_logged_in
+        collection = Collection.find(params[:id])
+        if collection.destroy
+            flash[:success] = "Collection successfully destroyed"
+            redirect '/collections'
+        else
+            flash[:error] = collection.errors.full_messages.to_sentence
+            redirect "/collections/#{collection.id}"
+        end
     end 
 end 
