@@ -42,24 +42,22 @@ class CollectionsController < ApplicationController
             redirect '/collections/new'
         end     
     end 
-    #blank page with no content at '/collections#{@collection.id}' after editing collection
+
     patch '/collections/:id' do 
-        if logged_in? 
-            collection = Collection.find(params[:id])
-            if collection && collection.user == current_user
-                if collection.update(destination: params[:destination], start_date: params[:start_date], end_date: params[:end_date], trip_summary: params[:trip_summary])
-                    redirect "/collections/#{collection.id}"
-                else 
-                    redirect "/collections/#{collection.id}/edit"
-                end 
-            else
-                flash[:error] = "Access denied!"
-                redirect '/collections'
+        redirect_if_not_logged_in
+        collection = Collection.find(params[:id])
+        if collection && collection.user == current_user
+            if collection.update(destination: params[:destination], start_date: params[:start_date], end_date: params[:end_date], trip_summary: params[:trip_summary])
+                redirect "/collections/#{collection.id}"
+            else 
+                redirect "/collections/#{collection.id}/edit"
             end 
-        else 
-            redirect_to_login
+        else
+            flash[:error] = "Access denied!"
+            redirect '/collections'
         end 
     end 
+    
     delete '/collections/:id' do 
         if logged_in?
             collection = Collection.find(params[:id])
