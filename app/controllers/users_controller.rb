@@ -9,9 +9,9 @@ class UsersController < ApplicationController
   end 
 
   post '/signup' do 
-    @user = User.create(:first_name => params[:firstname], :last_name => params[:lastname], :email => params[:email], :username => params[:username], :password => params[:password])
-    if @user.valid?
-      session[:user_id] = @user.id
+    user = User.create(:first_name => params[:firstname], :last_name => params[:lastname], :email => params[:email], :username => params[:username], :password => params[:password])
+    if user.valid?
+      session[:user_id] = user.id
       redirect_to_homepage
     else 
       flash[:error] = user.errors.full_messages.to_sentence
